@@ -1,11 +1,10 @@
-const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 /**
  * Defines the default headers for these functions to work with `json-server`
  */
 const headers = new Headers();
-headers.append("Content-Type", "application/json");
+headers.append('Content-Type', 'application/json');
 
 /**
  * Fetch `json` from the specified URL and handle error status codes and ignore `AbortError`s
@@ -37,7 +36,7 @@ async function fetchJson(url, options, onCancel) {
     }
     return payload.data;
   } catch (error) {
-    if (error.name !== "AbortError") {
+    if (error.name !== 'AbortError') {
       console.error(error.stack);
       throw error;
     }
@@ -100,13 +99,13 @@ export async function readMovie(movieId, signal) {
 
 export async function deleteReview(reviewId) {
   const url = `${API_BASE_URL}/reviews/${reviewId}`;
-  return await fetchJson(url, { method: "DELETE", headers }, {});
+  return await fetchJson(url, { method: 'DELETE', headers }, {});
 }
 
 export async function updateReview(reviewId, data) {
   const url = `${API_BASE_URL}/reviews/${reviewId}`;
   const options = {
-    method: "PUT",
+    method: 'PUT',
     headers,
     body: JSON.stringify({ data }),
   };
